@@ -26,10 +26,9 @@ class TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          // Icon
           Container(
             width: 46,
             height: 46,
@@ -40,7 +39,6 @@ class TransactionTile extends StatelessWidget {
             child: Icon(icon, color: iconColor, size: 22),
           ),
           const SizedBox(width: 12),
-          // Title & subtitle
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +63,7 @@ class TransactionTile extends StatelessWidget {
               ],
             ),
           ),
-          // Amount
+          // green for income, red for expense
           Text(
             isCredit ? '+$amount' : amount,
             style: TextStyle(

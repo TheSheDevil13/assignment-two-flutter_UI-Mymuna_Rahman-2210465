@@ -10,74 +10,42 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Profile',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
-                ),
+              _buildHeader(),
+              const SizedBox(height: 24),
+              const Center(
+                child: Text('User Profile', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textDark)),
               ),
-              const SizedBox(height: 28),
-              // Avatar
-              Container(
-                width: 90,
-                height: 90,
-                decoration: const BoxDecoration(
-                  color: AppColors.primary,
-                  shape: BoxShape.circle,
-                ),
-                child: const Center(
-                  child: Text(
-                    'MR',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(height: 24),
+              Center(
+                child: Container(
+                  width: 96,
+                  height: 96,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+                      child: const Center(
+                        child: Text('MR', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),
+                      ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 14),
-              const Text(
-                'Mymuna Rahman',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
-                ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                '2210465@iub.edu.bd',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textGrey,
-                ),
-              ),
               const SizedBox(height: 28),
-              // Info cards
-              _infoCard(
-                icon: Icons.person_outline,
-                label: 'Student Name',
-                value: 'Mymuna Rahman',
-              ),
+              _infoCard(label: 'Name', value: 'Mymuna Rahman'),
               const SizedBox(height: 12),
-              _infoCard(
-                icon: Icons.badge_outlined,
-                label: 'Student ID',
-                value: '2210465',
-              ),
+              _infoCard(label: 'Student ID', value: '2210465'),
               const SizedBox(height: 12),
-              _infoCard(
-                icon: Icons.email_outlined,
-                label: 'Student Email',
-                value: '2210465@iub.edu.bd',
-              ),
+              _infoCard(label: 'Email', value: '2210465@iub.edu.bd'),
               const SizedBox(height: 12),
               _bioCard(),
             ],
@@ -87,58 +55,72 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _infoCard({
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+              child: const Center(
+                child: Text('M', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Welcome back,', style: TextStyle(fontSize: 13, color: AppColors.textGrey)),
+                Text('Mymuna Rahman', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark)),
+              ],
+            ),
+          ],
+        ),
+        Stack(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, 2))],
+              ),
+              child: const Icon(Icons.notifications_outlined, color: AppColors.textDark, size: 22),
+            ),
+            Positioned(
+              right: 9,
+              top: 9,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(color: AppColors.red, shape: BoxShape.circle),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _infoCard({required String label, required String value}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, color: AppColors.primary, size: 20),
-          ),
-          const SizedBox(width: 14),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: AppColors.textGrey,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textDark,
-                ),
-              ),
-            ],
-          ),
+          Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textGrey)),
+          const SizedBox(height: 4),
+          Text(value, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textDark)),
         ],
       ),
     );
@@ -151,48 +133,16 @@ class ProfilePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.auto_stories_outlined,
-                    color: AppColors.primary, size: 20),
-              ),
-              const SizedBox(width: 14),
-              const Text(
-                'Bio / Story',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textDark,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Hi! I\'m Mymuna Rahman, a passionate Computer Science & Engineering student at the Independent University, Bangladesh (IUB). I enjoy building creative mobile experiences with Flutter and love exploring the intersection of design and technology. This app is my Assignment 2 submission for the Flutter UI course.',
-            style: TextStyle(
-              fontSize: 13,
-              color: AppColors.textGrey,
-              height: 1.6,
-            ),
+          Text('Bio / Story', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark)),
+          SizedBox(height: 10),
+          Text(
+            '"Hi! I\'m Mymuna Rahman, a Computer Science & Engineering student at IUB. I love building apps with Flutter and exploring the intersection of design and technology. This app is my Assignment 2 submission for the Flutter UI course."',
+            style: TextStyle(fontSize: 13, color: AppColors.textGrey, fontStyle: FontStyle.italic, height: 1.6),
           ),
         ],
       ),
