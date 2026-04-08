@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../widgets/app_header.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -14,7 +15,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              const AppHeader(),
               const SizedBox(height: 24),
               const Center(
                 child: Text('User Profile', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textDark)),
@@ -55,56 +56,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 46,
-              height: 46,
-              decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
-              child: const Center(
-                child: Text('M', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-            ),
-            const SizedBox(width: 12),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Welcome back,', style: TextStyle(fontSize: 13, color: AppColors.textGrey)),
-                Text('Mymuna Rahman', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark)),
-              ],
-            ),
-          ],
-        ),
-        Stack(
-          children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, 2))],
-              ),
-              child: const Icon(Icons.notifications_outlined, color: AppColors.textDark, size: 22),
-            ),
-            Positioned(
-              right: 9,
-              top: 9,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(color: AppColors.red, shape: BoxShape.circle),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+
 
   Widget _infoCard({required String label, required String value}) {
     return Container(

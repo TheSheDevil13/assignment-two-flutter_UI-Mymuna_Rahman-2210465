@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../widgets/quick_action_button.dart';
+import '../widgets/app_header.dart';
 
 class CardsPage extends StatelessWidget {
   const CardsPage({super.key});
@@ -14,7 +16,7 @@ class CardsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              const AppHeader(),
               const SizedBox(height: 24),
               const Text('My Cards', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textDark)),
               const SizedBox(height: 20),
@@ -30,56 +32,7 @@ class CardsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 46,
-              height: 46,
-              decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
-              child: const Center(
-                child: Text('M', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-            ),
-            const SizedBox(width: 12),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Welcome back,', style: TextStyle(fontSize: 13, color: AppColors.textGrey)),
-                Text('Mymuna Rahman', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark)),
-              ],
-            ),
-          ],
-        ),
-        Stack(
-          children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, 2))],
-              ),
-              child: const Icon(Icons.notifications_outlined, color: AppColors.textDark, size: 22),
-            ),
-            Positioned(
-              right: 9,
-              top: 9,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(color: AppColors.red, shape: BoxShape.circle),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+
 
   Widget _buildBankCard() {
     return Container(
@@ -145,41 +98,17 @@ class CardsPage extends StatelessWidget {
 
   Widget _buildActionButtons() {
     return Row(
-      children: [
-        _actionButton(icon: Icons.close_rounded, label: 'Block'),
-        const SizedBox(width: 12),
-        _actionButton(icon: Icons.credit_card_outlined, label: 'Details'),
-        const SizedBox(width: 12),
-        _actionButton(icon: Icons.info_outline_rounded, label: 'Limit'),
+      children: const [
+        QuickActionButton(icon: Icons.close_rounded, label: 'Block'),
+        SizedBox(width: 12),
+        QuickActionButton(icon: Icons.credit_card_outlined, label: 'Details'),
+        SizedBox(width: 12),
+        QuickActionButton(icon: Icons.info_outline_rounded, label: 'Limit'),
       ],
     );
   }
 
-  Widget _actionButton({required IconData icon, required String label}) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, 2))],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.1), shape: BoxShape.circle),
-              child: Icon(icon, color: AppColors.primary, size: 22),
-            ),
-            const SizedBox(height: 8),
-            Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textGrey)),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildLinkedAccounts() {
     return Column(
