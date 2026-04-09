@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_header.dart';
+import '../widgets/summary_card.dart';
 
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});
@@ -35,27 +36,23 @@ class ReportsPage extends StatelessWidget {
 
 
   Widget _buildTotalExpensesCard() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 2))],
+    return const SummaryCard(
+      title: 'Total Expenses (Last 30 days)',
+      padding: EdgeInsets.all(20),
+      amountSpacing: 8,
+      bottomSpacing: 8,
+      // decoration uses the default (white + shadow) so we can leave it null or pass it explicitly
+      amount: Text(
+        '-\$1270.00',
+        style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.red),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      bottom: Row(
         children: [
-          const Text('Total Expenses (Last 30 days)', style: TextStyle(fontSize: 13, color: AppColors.textGrey)),
-          const SizedBox(height: 8),
-          const Text('-\$1270.00', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.red)),
-          const SizedBox(height: 8),
-          Row(
-            children: const [
-              Icon(Icons.arrow_upward_rounded, color: AppColors.orange, size: 16),
-              SizedBox(width: 4),
-              Text('Up 12% from last month', style: TextStyle(fontSize: 13, color: AppColors.orange, fontWeight: FontWeight.w500)),
-            ],
+          Icon(Icons.arrow_upward_rounded, color: AppColors.orange, size: 16),
+          SizedBox(width: 4),
+          Text(
+            'Up 12% from last month',
+            style: TextStyle(fontSize: 13, color: AppColors.orange, fontWeight: FontWeight.w500),
           ),
         ],
       ),

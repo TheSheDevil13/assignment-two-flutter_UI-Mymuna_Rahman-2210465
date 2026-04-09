@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_header.dart';
+import '../widgets/summary_card.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -42,13 +43,29 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 28),
-              _infoCard(label: 'Name', value: 'Mymuna Rahman'),
+              _buildProfileInfo(label: 'Name', value: 'Mymuna Rahman'),
               const SizedBox(height: 12),
-              _infoCard(label: 'Student ID', value: '2210465'),
+              _buildProfileInfo(label: 'Student ID', value: '2210465'),
               const SizedBox(height: 12),
-              _infoCard(label: 'Email', value: '2210465@iub.edu.bd'),
+              _buildProfileInfo(label: 'Email', value: '2210465@iub.edu.bd'),
               const SizedBox(height: 12),
-              _bioCard(),
+              const SummaryCard(
+                title: 'Bio / Story',
+                titleStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark),
+                padding: EdgeInsets.all(16),
+                amountSpacing: 10,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(14)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 2)),
+                  ],
+                ),
+                amount: Text(
+                  '"Hi! I\'m Mymuna Rahman, a Computer Science & Engineering student at IUB. I love building apps with Flutter and exploring the intersection of design and technology. This app is my Assignment 2 submission for the Flutter UI course."',
+                  style: TextStyle(fontSize: 13, color: AppColors.textGrey, fontStyle: FontStyle.italic, height: 1.6),
+                ),
+              ),
             ],
           ),
         ),
@@ -58,45 +75,25 @@ class ProfilePage extends StatelessWidget {
 
 
 
-  Widget _infoCard({required String label, required String value}) {
-    return Container(
-      width: double.infinity,
+  Widget _buildProfileInfo({required String label, required String value}) {
+    return SummaryCard(
+      title: label,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      amountSpacing: 4,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textGrey)),
-          const SizedBox(height: 4),
-          Text(value, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textDark)),
-        ],
-      ),
-    );
-  }
-
-  Widget _bioCard() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Bio / Story', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textDark)),
-          SizedBox(height: 10),
-          Text(
-            '"Hi! I\'m Mymuna Rahman, a Computer Science & Engineering student at IUB. I love building apps with Flutter and exploring the intersection of design and technology. This app is my Assignment 2 submission for the Flutter UI course."',
-            style: TextStyle(fontSize: 13, color: AppColors.textGrey, fontStyle: FontStyle.italic, height: 1.6),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
+      ),
+      amount: Text(
+        value,
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textDark),
       ),
     );
   }

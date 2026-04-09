@@ -3,6 +3,7 @@ import '../theme/app_theme.dart';
 import '../widgets/transaction_tile.dart';
 import '../widgets/quick_action_button.dart';
 import '../widgets/app_header.dart';
+import '../widgets/summary_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -42,8 +43,9 @@ class HomePage extends StatelessWidget {
 
 
   Widget _buildBalanceCard() {
-    return Container(
-      width: double.infinity,
+    return SummaryCard(
+      title: 'Total Balance',
+      titleStyle: const TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -56,57 +58,44 @@ class HomePage extends StatelessWidget {
           BoxShadow(color: AppColors.primary.withValues(alpha: 0.35), blurRadius: 20, offset: const Offset(0, 8)),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Total Balance', style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500)),
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.credit_card_outlined, color: Colors.white, size: 20),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                  text: '\$8,945',
-                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: -1),
-                ),
-                TextSpan(
-                  text: '.32',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ],
+      trailing: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: const Icon(Icons.credit_card_outlined, color: Colors.white, size: 20),
+      ),
+      amount: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: '\$8,945',
+              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: -1),
             ),
-          ),
-          const SizedBox(height: 18),
+            TextSpan(
+              text: '.32',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+      bottom: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('Savings: \$5,500', style: TextStyle(color: Colors.white70, fontSize: 13)),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Savings: \$5,500', style: TextStyle(color: Colors.white70, fontSize: 13)),
-              Row(
-                children: [
-                  const Text('Last 30 days: +\$300', style: TextStyle(color: Colors.white70, fontSize: 13)),
-                  const SizedBox(width: 4),
-                  Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: const Icon(Icons.arrow_forward, color: Colors.white, size: 12),
-                  ),
-                ],
+              const Text('Last 30 days: +\$300', style: TextStyle(color: Colors.white70, fontSize: 13)),
+              const SizedBox(width: 4),
+              Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Icon(Icons.arrow_forward, color: Colors.white, size: 12),
               ),
             ],
           ),
